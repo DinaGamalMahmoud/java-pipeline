@@ -1,29 +1,25 @@
 pipeline {
     agent {
        label 'android-poc-slave'
-          }
-    stages {
+ }  stages {
         stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
-            }
-        }
+            }  }
         stage('Test') {
               steps {
                 script {
                      try {
                         sh 'mvn test'
                         junit 'target/surefire-reports/*.xml'
-
                           } catch(err) {
-                                junit 'target/surefire-reports/*.xml'
-                                slackSend ( teamDomain: 'https://jenkinsapp.slack.com', token: 'SZMv8yOkIeuFtFmDJO9NRViC', 
-                                           baseUrl: 'https://jenkinsapp.slack.com/services/hooks/jenkins-ci/', channel: '#general',color: '#FF0000',
-                                           message: """Error: Job "${env.STAGE_NAME} ${env.JOB_NAME} [${env.BUILD_NUMBER}]" (${env.BUILD_URL})
-                                           on branch: ${env.BRANCH_NAME}[ Test Results Charts: ${env.JOB_URL}test_results_analyzer ]""")
-                                throw err
-                          }
-        }   }    }
+                             junit 'target/surefire-reports/*.xml'
+                             slackSend (teamDomain: 'https://jenkinsapp.slack.com', token: 'SZMv8yOkIeuFtFmDJO9NRViC', 
+                                        baseUrl: 'https://jenkinsapp.slack.com/services/hooks/jenkins-ci/', channel: '#general',color: '#FF0000',
+                                        message: """Error: Job "${env.STAGE_NAME} ${env.JOB_NAME} [${env.BUILD_NUMBER}]" (${env.BUILD_URL})
+                                        on branch: ${env.BRANCH_NAME}[ Test Results Charts: ${env.JOB_URL}test_results_analyzer ]""")
+                             throw err
+                          }  }   }    }
         stage('Deliver') {
             steps {
                     echo "Im deploying now!"
