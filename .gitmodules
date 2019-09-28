@@ -1,3 +1,6 @@
 [submodule "notepad"]
 	path = notepad
 	url = https://github.com/DinaGamalMahmoud/notepad
+[submodule "trysubmodule/testrepo"]
+	path = trysubmodule/testrepo
+	url = https://github.com/DinaGamalMahmoud/testrepo
