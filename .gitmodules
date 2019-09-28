@@ -1,0 +1,3 @@
+[submodule "notepad"]
+	path = notepad
+	url = https://github.com/DinaGamalMahmoud/notepad
